@@ -74,7 +74,13 @@ class OffsetChunkKeyEncoding(ChunkKeyEncoding):
         return self._base().encode_chunk_key(self._shift(chunk_coords, +1))
 
     def decode_chunk_key(self, chunk_key: str) -> tuple[int, ...]:
-        return self._shift(self._base().decode_chunk_key(chunk_key), -1)
+        if chunk_key == "c":
+            return self._shift((), -1)
+        prefix = "c" + self.separator
+        if not chunk_key.startswith(prefix):
+            raise ValueError(f"not an offset-encoded chunk key: {chunk_key!r}")
+        coords = tuple(int(part) for part in chunk_key[len(prefix):].split(self.separator))
+        return self._shift(coords, -1)
 
 
 register_chunk_key_encoding(NAME, OffsetChunkKeyEncoding)
