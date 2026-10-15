@@ -23,5 +23,11 @@ default) and the chunk key adds the offset per dimension, so grid coordinate `(0
   non-integer offset, other encodings unaffected) and key formatting (default and v2 as before,
   negative components, zero offset equals default).
 
-Verified: `vitest` for the new spec, `tsc --noEmit`, oxlint, eslint, prettier. Not verified
-here: loading such a store in a browser session.
+- `testdata/datasource/zarr/zarr_v3/examples/offset_grown`: a `(6, 7)` uint16 array written
+  under `default`, then grown by one chunk row in front through the metadata edit (shape
+  `(10, 7)`, `offset [-1, 0]`, keys `c/-1/*` beside the untouched `c/0/*`, `c/1/*`), added to
+  `tests/datasource/zarr.browser_test.ts` with its metadata snapshot.
+
+Verified: `vitest` for the new spec and for `src/datasource/zarr`, the browser metadata
+snapshot tests (headless Chromium), `tsc --noEmit`, oxlint, eslint, prettier. Not verified
+here: rendering such a store interactively.
