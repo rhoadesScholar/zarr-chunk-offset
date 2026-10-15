@@ -40,14 +40,14 @@ https://github.com/rhoadesScholar/zarr-chunk-offset/tree/main/bench
   multiscale level.
 - zarr-python core: `OffsetChunkKeyEncoding` plus `Array.prepend_chunks` / `Array.prepend`,
   branch https://github.com/rhoadesScholar/zarr-python/tree/offset-chunk-key-encoding
-  (zarr-developers/zarr-python#<N>).
+  (zarr-developers/zarr-python#4516).
 - tensorstore zarr3 driver: reads and writes it, including key-range deletion on shrink with
   negative key components,
   https://github.com/rhoadesScholar/tensorstore/tree/zarr3-offset-chunk-key-encoding
-  (google/tensorstore#<N>).
+  (google/tensorstore#296).
 - neuroglancer: reads it,
   https://github.com/rhoadesScholar/neuroglancer/tree/zarr-offset-chunk-key-encoding
-  (google/neuroglancer#<N>).
+  (google/neuroglancer#1133).
 
 Motivation: volumes assembled from parts that arrive over time in no fixed order (our case:
 serial-section pages registered as they are imaged, where a page can land below pages already

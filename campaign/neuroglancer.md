@@ -1,10 +1,10 @@
 Title: zarr: read the offset chunk key encoding
 
 Reads arrays that use the `offset` chunk key encoding
-(zarr-developers/zarr-extensions#<N>): the `default` key of `grid coordinate + offset`, one
+(zarr-developers/zarr-extensions#80): the `default` key of `grid coordinate + offset`, one
 integer per dimension, any sign. Writers use it to grow an array in the negative direction by
-whole chunks without renaming chunks (zarr-developers/zarr-python#<N>,
-google/tensorstore#<N>).
+whole chunks without renaming chunks (zarr-developers/zarr-python#4516,
+google/tensorstore#296).
 
 **Before / after.** Before: the `chunk_key_encoding` name regex is `^(v2|default)$`, so such an
 array fails to parse. After: `offset` parses (one integer per dimension, separator `/` by

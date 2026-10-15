@@ -1,6 +1,6 @@
 Title: Add the offset chunk key encoding and Array.prepend
 
-Adds the `offset` chunk key encoding (zarr-developers/zarr-extensions#<N>): the `default` key
+Adds the `offset` chunk key encoding (zarr-developers/zarr-extensions#80): the `default` key
 of `chunk_coords + offset`, one integer per dimension, any sign. Under it an array grows in
 the negative direction of an axis by whole chunks as a metadata-only change, and
 `Array.prepend(data, axis)`, the mirror of `Array.append`, does exactly that: `shape` grows,

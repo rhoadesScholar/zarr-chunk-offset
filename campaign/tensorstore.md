@@ -1,6 +1,6 @@
 Title: zarr3: support the offset chunk key encoding
 
-Adds the `offset` chunk key encoding (zarr-developers/zarr-extensions#<N>) to the zarr3
+Adds the `offset` chunk key encoding (zarr-developers/zarr-extensions#80) to the zarr3
 driver: the `default` key of `grid_index + offset`, one integer per dimension, any sign. It
 lets an array grow in the negative direction of a dimension by whole chunks as a
 metadata-only change (`shape` grows, `offset` drops; every existing chunk keeps its key), which

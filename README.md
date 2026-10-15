@@ -71,9 +71,9 @@ metadata-only at every level only when `k * chunk_s0 / downsample_i` is a whole 
 
 ## Status
 
-A proposal, with this package as the implementation the extension registry asks for. Nothing
-is posted upstream yet; `campaign/` holds the PR bodies and the research behind the design.
-Branches on forks carry the reader and writer changes:
+A proposal, with this package as the implementation the extension registry asks for. Draft PRs
+are open (zarr-extensions#80, zarr-python#4516, tensorstore#296, neuroglancer#1133); `campaign/`
+holds their bodies and the research behind the design:
 
 | repo | branch | what |
 |---|---|---|
