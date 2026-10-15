@@ -78,7 +78,7 @@ Branches on forks carry the reader and writer changes:
 | repo | branch | what |
 |---|---|---|
 | zarr-developers/zarr-extensions | [`chunk-key-encodings/offset`](https://github.com/rhoadesScholar/zarr-extensions/tree/chunk-key-encodings/offset) | the registry entry (`extension/` here is its source) |
-| zarr-developers/zarr-python | [`offset-chunk-key-encoding`](https://github.com/rhoadesScholar/zarr-python/tree/offset-chunk-key-encoding) | `OffsetChunkKeyEncoding` in core, `Array.prepend_chunks` / `Array.prepend` |
+| zarr-developers/zarr-python | [`offset-chunk-key-encoding`](https://github.com/rhoadesScholar/zarr-python/tree/offset-chunk-key-encoding) | `OffsetChunkKeyEncoding` in core, `Array.prepend` (the mirror of `append`) |
 | google/tensorstore | [`zarr3-offset-chunk-key-encoding`](https://github.com/rhoadesScholar/tensorstore/tree/zarr3-offset-chunk-key-encoding) | zarr3 driver reads and writes it, key-range deletion with negative keys |
 | google/neuroglancer | [`zarr-offset-chunk-key-encoding`](https://github.com/rhoadesScholar/neuroglancer/tree/zarr-offset-chunk-key-encoding) | reads it |
 
