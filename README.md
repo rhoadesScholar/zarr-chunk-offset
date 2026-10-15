@@ -71,11 +71,19 @@ metadata-only at every level only when `k * chunk_s0 / downsample_i` is a whole 
 
 ## Status
 
-A proposal, with this package as the implementation the extension registry asks for. The
-extension text is intended for `chunk-key-encodings/offset/` in
-[zarr-developers/zarr-extensions](https://github.com/zarr-developers/zarr-extensions); readers
-in neuroglancer and tensorstore each need a small change to accept the name and add the offset
-where grid indices become keys.
+A proposal, with this package as the implementation the extension registry asks for. Nothing
+is posted upstream yet; `campaign/` holds the PR bodies and the research behind the design.
+Branches on forks carry the reader and writer changes:
+
+| repo | branch | what |
+|---|---|---|
+| zarr-developers/zarr-extensions | [`chunk-key-encodings/offset`](https://github.com/rhoadesScholar/zarr-extensions/tree/chunk-key-encodings/offset) | the registry entry (`extension/` here is its source) |
+| zarr-developers/zarr-python | [`offset-chunk-key-encoding`](https://github.com/rhoadesScholar/zarr-python/tree/offset-chunk-key-encoding) | `OffsetChunkKeyEncoding` in core, `Array.prepend_chunks` / `Array.prepend` |
+| google/tensorstore | [`zarr3-offset-chunk-key-encoding`](https://github.com/rhoadesScholar/tensorstore/tree/zarr3-offset-chunk-key-encoding) | zarr3 driver reads and writes it, key-range deletion with negative keys |
+| google/neuroglancer | [`zarr-offset-chunk-key-encoding`](https://github.com/rhoadesScholar/neuroglancer/tree/zarr-offset-chunk-key-encoding) | reads it |
+
+`bench/` measures what a growth costs today against the metadata edit (67× to 2 800× at
+32 768 chunks, and the gap is the array size).
 
 ```
 pip install zarr-chunk-offset
