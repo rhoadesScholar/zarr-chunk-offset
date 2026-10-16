@@ -117,6 +117,26 @@ def after_offset(a: zarr.Array, k: int) -> int:
     return 0
 
 
+def after_bounded(a: zarr.Array, k: int) -> int:
+    """The metadata step of `Array.prepend` under the `regular_bounded` chunk grid: one
+    zarr.json write that switches the grid and moves the lower bound."""
+    store = a.store
+    proto = default_buffer_prototype()
+    meta = json.loads(sync(store.get("zarr.json", prototype=proto)).to_bytes())
+    n = k * a.chunks[0]
+    meta["shape"][0] += n
+    meta["chunk_grid"] = {
+        "name": "regular_bounded",
+        "configuration": {
+            "chunk_shape": meta["chunk_grid"]["configuration"]["chunk_shape"],
+            "origin": [0] * len(meta["shape"]),
+            "lower_bound": [-n] + [0] * (len(meta["shape"]) - 1),
+        },
+    }
+    sync(store.set("zarr.json", proto.buffer.from_bytes(json.dumps(meta).encode())))
+    return 0
+
+
 def run(store_kind: str, n_chunks: int, k: int, methods: list[str], root: Path) -> list[dict]:
     rows = []
     for method in methods:
@@ -144,11 +164,13 @@ def run(store_kind: str, n_chunks: int, k: int, methods: list[str], root: Path) 
             touched = before_copy(a, k, factory)
         elif method == "offset":
             touched = after_offset(a, k)
+        elif method == "bounded":
+            touched = after_bounded(a, k)
         else:
             raise SystemExit(f"unknown method {method}")
         dt = time.perf_counter() - t0
-        if method == "offset":
-            assert chunk_keys(a.store) == keys_before, "offset moved a chunk key"
+        if method in ("offset", "bounded"):
+            assert chunk_keys(a.store) == keys_before, f"{method} moved a chunk key"
         rows.append({"store": store_kind, "chunks": len(keys_before), "k": k, "method": method,
                      "seconds": round(dt, 4), "keys_touched": touched})
         print(json.dumps(rows[-1]), flush=True)
@@ -163,7 +185,7 @@ def main() -> None:
     p.add_argument("--chunks", type=int, nargs="+", default=[64, 512, 4096])
     p.add_argument("--k", type=int, default=2, help="chunks to add in front of axis 0")
     p.add_argument("--stores", nargs="+", default=["memory", "local"])
-    p.add_argument("--methods", nargs="+", default=["rename", "set-del", "copy", "offset"])
+    p.add_argument("--methods", nargs="+", default=["rename", "set-del", "copy", "bounded"])
     p.add_argument("--json", type=Path, default=None, help="append rows here")
     args = p.parse_args()
     root = args.root or Path(tempfile.mkdtemp(prefix="prepend-bench-"))

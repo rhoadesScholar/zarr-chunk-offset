@@ -1,0 +1,8 @@
+{"store": "memory", "chunks": 64, "k": 2, "method": "bounded", "seconds": 0.0002, "keys_touched": 0}
+{"store": "memory", "chunks": 512, "k": 2, "method": "bounded", "seconds": 0.0002, "keys_touched": 0}
+{"store": "memory", "chunks": 4096, "k": 2, "method": "bounded", "seconds": 0.0002, "keys_touched": 0}
+{"store": "memory", "chunks": 32768, "k": 2, "method": "bounded", "seconds": 0.0002, "keys_touched": 0}
+{"store": "local", "chunks": 64, "k": 2, "method": "bounded", "seconds": 0.0008, "keys_touched": 0}
+{"store": "local", "chunks": 512, "k": 2, "method": "bounded", "seconds": 0.0013, "keys_touched": 0}
+{"store": "local", "chunks": 4096, "k": 2, "method": "bounded", "seconds": 0.002, "keys_touched": 0}
+{"store": "local", "chunks": 32768, "k": 2, "method": "bounded", "seconds": 0.0018, "keys_touched": 0}

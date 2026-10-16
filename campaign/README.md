@@ -4,12 +4,11 @@ Opened as drafts on 2026-10-15; marked ready for review and announced on 2026-10
 jbms, clbarnes on #80; d-v-b on #4516; jbms on #296 and #1133), and the pointer comment was posted
 on zarr-specs #9 and #122. Each file here is the source of one PR body.
 
-**2026-10-16, redirected.** jbms and d-v-b prefer an `origin` on the chunk grids plus array
-bounds in place of `shape`, planned in
-[zarr-extensions#79](https://github.com/zarr-developers/zarr-extensions/issues/79). All four PRs
-are back in draft as a prototype; design notes from the prototype (the derivation, the
-reader-safety table, negative-key handling) are posted on #79, and the zarr-specs pointer
-comments now point there.
+**2026-10-16, redirected and reworked.** jbms and d-v-b preferred an `origin` on the chunk grid
+plus array bounds ([zarr-extensions#79](https://github.com/zarr-developers/zarr-extensions/issues/79)).
+The four branches now implement the registry option from #79, a `regular_bounded` chunk grid with
+`origin` and `lower_bound`; the registry entry moves from #80 (closed) to a new PR. The PR bodies
+in this directory describe the superseded `offset` design and are kept as history.
 
 | order | repo | branch | PR | body |
 |---|---|---|---|---|
